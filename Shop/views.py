@@ -68,7 +68,7 @@ class WishlistViewSet(viewsets.ModelViewSet):
     serializer_class = WishlistSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['product']
-
+    permission_classes = [IsAuthenticated]
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
