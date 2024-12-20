@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "Profile.apps.ProfileConfig",
     'drf_yasg',
+    'django_filters',
 
 ]
 

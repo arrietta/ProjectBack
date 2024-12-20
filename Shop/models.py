@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Category Model for Products
 class Category(models.Model):
     name = models.CharField(max_length=255)
     parent_category = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
@@ -11,7 +10,6 @@ class Category(models.Model):
         return self.name
 
 
-# Product Model
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -25,7 +23,6 @@ class Product(models.Model):
         return self.name
 
 
-# Review Model for Products
 class Review(models.Model):
     product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -37,7 +34,6 @@ class Review(models.Model):
         return f"Review for {self.product.name} by {self.user.username}"
 
 
-# Cart Model
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -47,7 +43,6 @@ class Cart(models.Model):
         return f"{self.quantity} x {self.product.name} for {self.user.username}"
 
 
-# Order Model
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Cart)
@@ -62,7 +57,6 @@ class Order(models.Model):
         return f"Order {self.id} by {self.user.username}"
 
 
-# Wishlist Model
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
